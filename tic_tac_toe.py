@@ -19,49 +19,47 @@ def next_move(board, symbol):
         row_index = int(input(f"Player {symbol}, enter row (0-2): "))
         col_index = int(input(f"Player {symbol}, enter column (0-2): "))
         if 0 <= row_index < 3 and 0 <= col_index < 3 and board[row_index][col_index] == '':
-            return row_index, row_index
+            return row_index, col_index
         else:
             print("Invalid move. Try again.")
 
 def check_winner(board, symbol):
     #check if any of the rows, columns, or diagonals of the board contain three of the player's symbols in a row
-
-    def check_win(board, symbol):
-        for i in range(3):
-            row_win = True
-            for j in range(3):
-                if board[i][j] != symbol:
-                    row_win = False
-                    break
-            if row_win:
-                return True
-
-        for i in range(3):
-            col_win = True
-            for j in range(3):
-                if board[j][i] != symbol:
-                    col_win = False
-                    break
-            if col_win:
-                return True
-
-        main_diag_win = True
-        for i in range(3):
-            if board[i][i] != symbol:
-                main_diag_win = False
+    for i in range(3):
+        row_win = True
+        for j in range(3):
+            if board[i][j] != symbol:
+                row_win = False
                 break
-        if main_diag_win:
+        if row_win:
             return True
 
-        secondary_diag_win = True
-        for i in range(3):
-            if board[i][2 - i] != symbol:
-                secondary_diag_win = False
+    for i in range(3):
+        col_win = True
+        for j in range(3):
+            if board[j][i] != symbol:
+                col_win = False
                 break
-        if secondary_diag_win:
+        if col_win:
             return True
 
-        return False
+    main_diag_win = True
+    for i in range(3):
+        if board[i][i] != symbol:
+            main_diag_win = False
+            break
+    if main_diag_win:
+        return True
+
+    secondary_diag_win = True
+    for i in range(3):
+        if board[i][2 - i] != symbol:
+            secondary_diag_win = False
+            break
+    if secondary_diag_win:
+        return True
+
+    return False
 
 
 def check_tie(board):
@@ -96,3 +94,8 @@ while Flage:
         Flage = False
 
     current_player = 'O' if current_player == 'X' else 'X'
+    
+    
+    
+    
+    
